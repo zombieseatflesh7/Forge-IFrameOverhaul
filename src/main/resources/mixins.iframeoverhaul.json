@@ -1,0 +1,8 @@
+{
+    "compatibilityLevel": "JAVA_8",
+    "package": "net.zombieseatflesh7.iframeoverhaul.mixin",
+    "refmap": "refmap.iframeoverhaul.json",
+    "mixins": ["MixinEntityLivingBase", "MixinEntityPlayer"],
+    "client": [],
+    "server": []
+}
