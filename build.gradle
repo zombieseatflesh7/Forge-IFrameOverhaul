@@ -63,6 +63,7 @@ dependencies {
     }
 
     implementation fg.deobf("curse.maven:rlcombat-${rlcombat_version}")
+    implementation fg.deobf("curse.maven:reachfix-${reachfix_version}")
     implementation fg.deobf("curse.maven:spartanweaponry-${spartanweaponry_version}")
 }
 

@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.world.World;
 import net.zombieseatflesh7.iframeoverhaul.DamageGroup;
 import net.zombieseatflesh7.iframeoverhaul.IFrame;
@@ -34,7 +35,7 @@ public abstract class MixinEntityLivingBase
 
 	@Redirect(method = "attackEntityFrom", at = @At(value = "FIELD", target = "net.minecraft.entity.EntityLivingBase.hurtResistantTime:I", ordinal = 0))
 	private int getHurtResistanceTime(EntityLivingBase entity, DamageSource source, float amount) {
-		if (!IFrameConfig.enabled)
+		if ((entity instanceof EntityPlayer) ? !IFrameConfig.affectsPlayers : !IFrameConfig.affectsMobs)
 			return entity.hurtResistantTime;
 		if (IFrameConfig.disableIFrames)
 			return 0;
@@ -48,7 +49,7 @@ public abstract class MixinEntityLivingBase
 		if(i > -1) {
 			iFrame = iFrames.get(i);
 
-			if(source.getTrueSource() instanceof EntityPlayer && source.getDamageType().equals("player")
+			if(source.getImmediateSource() instanceof EntityPlayer && source.getDamageType().equals("player")
 					&& ((float)entity.hurtResistantTime <= (float)entity.maxHurtResistantTime / 2.0F //sometimes mods set the hurt timer to 0, so im reading that
 					|| IFrameConfig.playerMeleePierces && IFrameMod.lastPlayerMeleeCooldown >= 0.75f)) { //fully charged attacked pierce iframes
 				if(IFrameConfig.doLogging)

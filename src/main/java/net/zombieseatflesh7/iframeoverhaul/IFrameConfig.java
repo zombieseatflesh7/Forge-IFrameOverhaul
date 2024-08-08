@@ -4,9 +4,16 @@ import net.minecraftforge.common.config.Config;
 
 @Config(modid = IFrameMod.MOD_ID)
 public class IFrameConfig {
-    @Config.Name("Enable Mod")
-    @Config.Comment({"Should i-frame changes be applied"})
-    public static boolean enabled = true;
+
+    @Config.Name("Affects Players")
+    @Config.Comment({"Toggles i-frame changes for players",
+            "Leave this on, coward"})
+    public static boolean affectsPlayers = true;
+
+    @Config.Name("Affects Mobs")
+    @Config.Comment({"Toggles i-frame changes for mobs",
+            "Makes combat a little easier"})
+    public static boolean affectsMobs = true;
 
     @Config.Name("Chat Logs")
     @Config.Comment({"Prints a ton of annoying messages to chat",
@@ -23,7 +30,7 @@ public class IFrameConfig {
     public static boolean arrowsIgnored = false;
 
     @Config.Name("Player Melee Ignores I-Frames")
-    @Config.Comment({"Fully charged player melee attacks will ignore i-frames"})
+    @Config.Comment({"Mostly charged player melee attacks will ignore i-frames"})
     public static boolean playerMeleePierces = false;
 
 
